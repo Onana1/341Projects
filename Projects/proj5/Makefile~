@@ -1,0 +1,14 @@
+CXX = g++
+CXXFLAGS = -g -Wall
+
+Anahash: Anahash.o test.cpp
+	$(CXX) $(CXXFLAGS) Anahash.o test.cpp -o Anahash
+
+Anahash.o: Anahash.cpp Anahash.h
+	$(CXX) $(CXXFLAGS) -c Anahash.cpp
+
+runHash:
+	./Anahash
+
+valgrind:
+	valgrind ./Anahash

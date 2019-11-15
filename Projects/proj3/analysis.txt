@@ -1,0 +1,44 @@
+Project 3 - Analysis of Alternative Restructuring
+
+
+Username: Onana1
+
+
+I. For each case in which you believe trinode restructuring (or some
+   other, novel idea) can be applied to more efficiently rebalance a
+   CTree, provide
+
+     (a) Description of the conditions; i.e., what must be true about
+     	 the imbalanced node and its subtrees to apply trinode
+     	 restructuring?  Conditions on height and size? Ancestors and
+     	 descendents?
+
+     (b) Describe how trinode restructuring would be applied in this
+         case; e.g. which nodes are x, y, z?
+
+     (c) Explain why trinode restructuring results in a size-balanced
+         subtree.
+
+     (d) Did you implement it, and did it work as expected?
+  
+     /// Type your answers here.  If you have multiple cases in which
+     /// trinode restructuring can be applied, be sure to label
+     /// the explanations for each case clearly.
+
+     /// You may include text representations of trees to help explain.
+     /// For example:
+     ///                     7
+     ///                   /   \
+     ///                  3     12
+     ///                /   \ 
+     ///               1    5      
+
+     (a).
+     (b).
+     (c). Trinode restructuring results in a size-balanced subtree because it moves the leftmost subtree root of the right tree into the root then takes the children of it and 
+	  fits into the right position of the left tree from the root. This movement of nodes results in a tree that is follows the size balance property. 
+     (d). No I did not implement it.
+II. Extra Credit: Why are the trees in this project called "Chestnut
+    Trees?"
+
+    /// They are called chestnut trees because the actual chestnut tree is very balanced on both sides and it grows in a way where each side is the same or very similar to the other.

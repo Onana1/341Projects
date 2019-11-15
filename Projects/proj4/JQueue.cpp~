@@ -1,0 +1,153 @@
+// JQueue: a job queue using a max-heap and function pointers
+// Based on MQueue by Scott Bennett (sb13@umbc.edu)
+// CMSC 341, Spring 2019
+
+#include "JQueue.h"
+
+//
+// JQueue implementations go here!!!!
+//
+
+//Queue constructor
+JQueue::JQueue(int capacity, prifn_t priFn){
+  if (capacity < 1){
+    throw std::out_of_range("This is too low of a capacity");
+  }
+  m_capacity = capacity+1;
+  m_size = 0;
+  m_heap = new job_t[m_capacity];
+  priority = priFn;
+}
+
+//Queue destructor
+JQueue::~JQueue(){
+  delete [] m_heap;
+}
+
+//Queue copy contructor
+JQueue::JQueue(const JQueue& rhs){
+  m_capacity = rhs.m_capacity;
+  m_size = rhs.m_size;
+  priority = rhs.priority;
+  m_heap = new job_t[m_capacity];
+  for (int i = 1; i <= m_size; i++){
+    m_heap[i] = rhs.m_heap[i];
+  }
+}
+
+//Overloaded assignment operator 
+JQueue& JQueue::operator=(const JQueue& rhs){
+  if (this != &rhs){
+    m_capacity = rhs.m_capacity;
+    m_size = rhs.m_size;
+    priority = rhs.priority;
+    for (int i = 1; i <= m_size; i++){
+      m_heap[i] = rhs.m_heap[i];
+    }
+  }
+  return *this;
+}
+
+//Function that inserts job into the Queue
+void JQueue::insertJob(const job_t input){
+  if (m_size == m_capacity-1){
+    throw std::range_error("The heap is at capacity");
+  }
+  int spot = ++m_size;
+  for( ; spot > 1 && priority(input) >= priority(m_heap[spot/2]); spot /= 2){
+    m_heap[spot] = m_heap[spot/2];
+  }
+  m_heap[spot] = input;
+}
+
+//Function that gets the highest priority job in the Queue
+job_t JQueue::getNextJob(){
+  job_t reJob = m_heap[1];
+  job_t tempJob;
+  if (m_size == 0){
+    throw std::range_error("The heap is empty");
+  }
+  m_heap[1] = m_heap[m_size];
+  m_heap[m_size] = tempJob;
+
+  int hole = 1;
+  int child;
+  job_t tmp = m_heap[hole];
+
+  for(; hole*2 < m_size; hole = child){
+    child = hole*2;
+    if(child != m_size && priority(m_heap[child + 1]) >
+       priority(m_heap[child])){
+      child++;
+    }
+    if(priority(m_heap[child]) > priority(tmp)){
+      m_heap[hole] = m_heap[child];
+    }else{
+      break;
+    }
+  }
+  m_heap[hole] = tmp;
+  //will always get the root
+  m_size = m_size - 1;
+  return reJob;
+}
+
+//Function that returns the size of the Queue
+int JQueue::numJobs() const{
+  return m_size;
+}
+
+//Print out the queue in array order
+void JQueue::printJobQueue() const{
+  for (int i = 1; i <= m_size; i++){
+    std::cout << "[" << i << "] " <<m_heap[i] << " (" << priority(m_heap[i])
+	      << ")" << std::endl;
+  }
+  std::cout << "Number of jobs in queue: " << m_size << std::endl;
+
+}
+
+//Returns the function that sets priority
+prifn_t JQueue::getPriorityFn(){
+  return priority;
+}
+
+//Sets a new priority function and rebuilds the Queue
+void JQueue::setPriorityFn(prifn_t priFn){
+  priority = priFn;
+  int tempSize = 0;
+  //put in array call insert until at end of array
+  job_t* tempHeap = new job_t[m_capacity];
+  while (tempSize < m_size){
+    int spot = ++tempSize;
+    for( ; spot > 1 && priority(m_heap[tempSize]) >=
+	   priority(tempHeap[spot/2]); spot /= 2){
+      tempHeap[spot] = tempHeap[spot/2];
+    }
+    tempHeap[spot] = m_heap[tempSize];
+  }
+  for (int i = 1; i <= m_size; i++){
+    m_heap[i] = tempHeap[i];
+  }
+  delete [] tempHeap;
+}
+
+//Prints out the heap for debugging
+void JQueue::dump() const{
+   for (int i = 0; i < m_capacity; i++){
+     std::cout << m_heap[i] <<  " (" << priority(m_heap[i]) << ")" <<
+       std::endl;
+  }
+}
+
+
+// Overloaded insertion operator for job_t
+std::ostream& operator<<(std::ostream& sout, const job_t& job)
+{
+  sout << "Job: " << job.m_name << ", pri: " << job.m_priority
+       << ", u: " << job.m_user << ", g: " << job.m_group << ", proc: "
+       << job.m_proc << ", mem: " << job.m_mem << ", time: " << job.m_time;
+  return sout;
+}
+
+

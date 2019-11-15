@@ -1,0 +1,24 @@
+Job Queue Size:4
+Number of jobs in the queue: 4
+[1] Job: test1a, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+[2] Job: test1, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+[3] Job: test2, pri: 50, u: 7, g: 5, proc: 128, mem: 512, time: 300 (316)
+[4] Job: test3, pri: 20, u: 3, g: 0, proc: 128, mem: 1024, time: 1800 (181)
+Job Queue Size:4
+Number of jobs in the queue: 4
+[1] Job: test3, pri: 20, u: 3, g: 0, proc: 128, mem: 1024, time: 1800 (1800)
+[2] Job: test1a, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (120)
+[3] Job: test2, pri: 50, u: 7, g: 5, proc: 128, mem: 512, time: 300 (300)
+[4] Job: test1, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (120)
+Job Queue Size:4
+Number of jobs in the queue: 4
+[1] Job: test1a, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+[2] Job: test1, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+[3] Job: test2, pri: 50, u: 7, g: 5, proc: 128, mem: 512, time: 300 (316)
+[4] Job: test3, pri: 20, u: 3, g: 0, proc: 128, mem: 1024, time: 1800 (181)
+
+Final queue in priority order:
+Job: test1a, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+Job: test1, pri: 50, u: 3, g: 11, proc: 16, mem: 1024, time: 120 (323)
+Job: test2, pri: 50, u: 7, g: 5, proc: 128, mem: 512, time: 300 (316)
+Job: test3, pri: 20, u: 3, g: 0, proc: 128, mem: 1024, time: 1800 (181)
